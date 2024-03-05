@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recipe Book</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+<header>
+    <h1>Recipe Book</h1>
+</header>
+<nav>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="recipes.html">Recipes</a></li>
+        <li><a href="addRecipe.html">Add recipe</a></li>
+    </ul>
+</nav>
+<main>
+    <h2>Search Recipes</h2>
+    <label for="search-input"></label>
+    <input type="text" id="search-input" placeholder="Search recipes...">
+    <button id="clear-button">Clear</button>
+    <script>
+        const input = document.querySelector("#search-input");
+        const clearButton = document.querySelector("#clear-button");
+
+        clearButton.addEventListener("click", function() {
+            input.value = "";
+        });
+    </script>
+    <button id="search-button">Search</button>
+    <template>
+        <div class="results">
+            <div class="header" data-header></div>
+        </div>
+    </template>
+    <script src="index.js"></script>
+    <div id="recipe-cards" data-recipe-cards-container></div>
+</main>
+<footer>
+    <p>&copy; 2024 Recipe Book</p>
+</footer>
+</body>
+</html>
+

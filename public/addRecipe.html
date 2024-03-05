@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Recipe Book</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <style>
+        form {
+            display: block;
+            text-align: center;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 50%;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #FFC107;
+            color: #fff;
+            padding: 10px 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Recipe Book</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="recipes.html">Recipes</a></li>
+            <li><a href="addRecipe.html">Add recipe</a></li>
+        </ul>
+    </nav>
+    <main>
+        <form id="add-recipe-form">
+            <div>
+                <label for="email" style="font-size:20px;"><strong>Your email:</strong></label><br>
+                <input type="email" id="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+            </div>
+            <br>
+            <div>
+                <label for="category" style="font-size:20px;"><strong>Category:</strong></label><br>
+                <select name="category" id="category">
+                    <option value="pizza">Pizza</option>
+                    <option value="pasta">Pasta</option>
+                    <option value="soup">Soup</option>
+                    <option value="steak">Steak</option>
+                </select>
+            </div>
+            <br>
+            <div>
+                <label for="recipe-name" style="font-size:20px;"><strong>Recipe Name:</strong></label><br>
+                <input type="text" id="recipe-name" name="recipe-name">
+            </div>
+            <br>
+            <div>
+                <label for="ingredients" style="font-size:20px;"><strong>Ingredients:</strong></label><br>
+                <textarea id="ingredients" name="ingredients"></textarea>
+            </div>
+            <br>
+            <div>
+                <label for="instructions" style="font-size:20px;"><strong>Instructions:</strong></label><br>
+                <textarea id="instructions" name="instructions"></textarea>
+            </div>
+            <br>
+            <button type="submit">Add Recipe</button>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2024 Recipe Book</p>
+    </footer>
+</body>
+
+</html>

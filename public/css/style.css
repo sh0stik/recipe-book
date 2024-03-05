@@ -1,0 +1,150 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background-color: #FFC107;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav {
+    position: fixed;
+    top: 100px;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background-color: #FFC107;
+    display: flex;
+    justify-content: center;
+
+}
+
+nav ul {
+    background-color: lightgray;
+    width: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav li {
+    margin: 0 10px;
+}
+
+nav a {
+    float: left;
+    display: block;
+    color: #fff;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+main {
+    background-image: url('img/pexels-lukas-349610.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    position: fixed;
+    top: 140px;
+    bottom: 30px;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    text-align: center;
+    overflow: scroll;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+#search-input {
+    font-size: 16px;
+    padding: 10px;
+}
+
+#search-button {
+    background-color: #FFC107;
+    color: #fff;
+    font-size: 16px;
+    padding: 10px 20px;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background-color: #FFC107;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+#recipe-cards {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+#search-button {
+    box-sizing: border-box;
+    border-color: #FFC107;
+}
+#recipe-info {
+    display: flex;
+}
+
+
+#clear-button{
+    background-color: #FFC107;
+    box-sizing: border-box;
+    border-color: #FFC107;
+    color: #fff;
+    font-size: 16px;
+    padding: 10px 20px;
+}
+table{
+    table-layout: fixed;
+    width: 100%;
+}
+.recipes th{
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+}
+
+.recipes tr{
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    width: 400px;
+}
+button{
+    background-color: #FFC107;
+    box-sizing: border-box;
+    border-color: #FFC107;
+    color: #fff;
+    font-size: 16px;
+    padding: 10px 20px;
+}
