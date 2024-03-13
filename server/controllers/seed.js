@@ -7,9 +7,9 @@ const sequelize = new Sequelize(CONNECTION_STRING, { dialect: 'postgres' });
 module.exports = {
     seed: (req, res) => {
         Promise.all([
-            sequelize.query('DROP TABLE IF EXISTS "recipe-ingredients"'),
-            sequelize.query('DROP TABLE IF EXISTS recipes'),
-            sequelize.query('DROP TABLE IF EXISTS ingredients')
+            sequelize.query('DROP TABLE IF EXISTS recipe_ingredients')
+                .then(() => sequelize.query('DROP TABLE IF EXISTS recipes'))
+                .then(() => sequelize.query('DROP TABLE IF EXISTS ingredients'))
         ]).then(() => {
             return Promise.all([
                 sequelize.query(`
@@ -23,19 +23,20 @@ module.exports = {
                 sequelize.query(`
                     CREATE TABLE ingredients (
                         ingredient_id SERIAL PRIMARY KEY,
-                        ingredient_name VARCHAR(100),
+                        ingredient_name VARCHAR(100) UNIQUE,
                         unit VARCHAR(100)
-                    )
-                `),
-                sequelize.query(`
-                    CREATE TABLE "recipe-ingredients" (
-                        recipe_id INT REFERENCES recipes(recipe_id),
-                        ingredient_id INT REFERENCES ingredients(ingredient_id),
-                        quantity INT,
-                        PRIMARY KEY (recipe_id, ingredient_id)
                     )
                 `)
             ]);
+        }).then(() => {
+            return sequelize.query(`
+                CREATE TABLE recipe_ingredients (
+                    id SERIAL PRIMARY KEY,
+                    recipe_id INTEGER REFERENCES recipes(recipe_id),
+                    ingredient_id INTEGER REFERENCES ingredients(ingredient_id),
+                    quantity FLOAT
+                )
+            `);
         }).then(() => {
             return Promise.all([
                 sequelize.query(`
@@ -63,22 +64,30 @@ module.exports = {
                         ('hot water', 'milliliters'),
                         ('flour', 'grams'),
                         ('chocolate chips', 'grams')
+                `),
+                sequelize.query(`
+                    INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+                    VALUES 
+                    (1, 1, 200),  
+                    (1, 2, 100),  
+                    (2, 3, 500),  
+                    (2, 4, 200),  
+                    (2, 5, 100),  
+                    (2, 6, 2),    
+                    (2, 7, 50),   
+                    (3, 8, 100),  
+                    (3, 9, 200),  
+                    (3, 10, 2),   
+                    (3, 11, 1),   
+                    (3, 12, 1),   
+                    (3, 13, 50),  
+                    (3, 14, 300), 
+                    (3, 15, 200)  
                 `)
+
             ]);
         }).then(() => {
             res.status(200).send('Database seeded');
         }).catch(err => console.log('error seeding DB', err));
-    },
-
-    getRecipes: (req, res) => {
-        sequelize.query('select * from recipes').then(response => {
-            res.status(200).send(response[0])
-        }).catch(err => console.log('error getting recipes', err))
-    },
-
-    getIngredients: (req, res) => {
-        sequelize.query('select * from ingredients').then(response => {
-            res.status(200).send(response[0])
-        }).catch(err => console.log('error getting ingredients', err))
     }
 }

@@ -4,75 +4,64 @@
 <head>
     <meta charset="UTF-8">
     <title>Recipe Book</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <style>
-        form {
-            display: block;
-            text-align: center;
-        }
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
 
-        input,
-        textarea,
-        select {
-            width: 50%;
-            padding: 10px;
-            margin-bottom: 20px;
-        }
-
-        button {
-            background-color: #FFC107;
-            color: #fff;
-            padding: 10px 20px;
-            margin-top: 20px;
-        }
-    </style>
 </head>
 
 <body>
     <header>
         <h1>Recipe Book</h1>
+        <nav>
+            <ul>
+                <a href="index.html">Home</a>
+                <a href="recipes.html">Recipes</a>
+                <a href="addRecipe.html">Add recipe</a>
+            </ul>
+        </nav>
     </header>
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="recipes.html">Recipes</a></li>
-            <li><a href="addRecipe.html">Add recipe</a></li>
-        </ul>
-    </nav>
     <main>
-        <form id="add-recipe-form">
-            <div>
-                <label for="email" style="font-size:20px;"><strong>Your email:</strong></label><br>
-                <input type="email" id="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+        <form id="add-recipe-form" onsubmit="event.preventDefault(); addNewRecipe();">
+            <h2>Add Recipe</h2>
+
+            <input type="text" id="title" name="title" required placeholder="Recipe Title">
+
+            <textarea id="description" name="description" placeholder="Recipe Description"></textarea>
+
+            <textarea id="instructions" name="instructions" placeholder="Instructions"></textarea>
+            <h2>Ingredients</h2>
+            <div class="ingredients">
+                <table id="ingredients-table">
+                    <tr>
+                        <th>Quantity</th>
+                        <th>Unit</th>
+                        <th>Item</th>
+                    </tr>
+                    <tr>
+                        <td><input type="number" name="quantity" placeholder="Quantity" min="1"></td>
+                        <td>
+                            <select name="unit">               
+                                <option value="gram">Gram</option>
+                                <option value="kilogram">Kilogram</option>
+                                <option value="milliliter">Milliliter</option>
+                                <option value="liter">Liter</option>
+                                <option value="piece">Piece</option>
+                                <option value="teaspoon">Teaspoon</option>
+                                <option value="tablespoon">Tablespoon</option>
+                                <option value="cup">Cup</option>
+                                <option value="ounce">Ounce</option>
+                                <option value="pound">Pound</option>
+                            </select>
+                        </td>
+                        <td><input type="text" name="item" placeholder="Item"></td>
+                    </tr>
+                </table>
+
+                <button type="button" id="add-ingredient-button" onclick="addIngredientRow()">Add Ingredient</button>
             </div>
-            <br>
-            <div>
-                <label for="category" style="font-size:20px;"><strong>Category:</strong></label><br>
-                <select name="category" id="category">
-                    <option value="pizza">Pizza</option>
-                    <option value="pasta">Pasta</option>
-                    <option value="soup">Soup</option>
-                    <option value="steak">Steak</option>
-                </select>
-            </div>
-            <br>
-            <div>
-                <label for="recipe-name" style="font-size:20px;"><strong>Recipe Name:</strong></label><br>
-                <input type="text" id="recipe-name" name="recipe-name">
-            </div>
-            <br>
-            <div>
-                <label for="ingredients" style="font-size:20px;"><strong>Ingredients:</strong></label><br>
-                <textarea id="ingredients" name="ingredients"></textarea>
-            </div>
-            <br>
-            <div>
-                <label for="instructions" style="font-size:20px;"><strong>Instructions:</strong></label><br>
-                <textarea id="instructions" name="instructions"></textarea>
-            </div>
-            <br>
+
             <button type="submit">Add Recipe</button>
         </form>
+        <script src="./js/index.js"></script>
     </main>
     <footer>
         <p>&copy; 2024 Recipe Book</p>
