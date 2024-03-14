@@ -56,16 +56,5 @@ module.exports = {
         sequelize.query('select * from recipes').then(response => {
             res.status(200).send(response[0]);
         }).catch(err => console.log('error getting recipes', err));
-    },
-
-    addQuantity: (req, res) => {
-        const { recipe_id, ingredient_id, quantity } = req.body;
-        sequelize.query(`
-            INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-            VALUES (${recipe_id}, ${ingredient_id}, ${quantity})
-            RETURNING *
-        `).then((recipeIngredient) => {
-            res.status(200).send(recipeIngredient[0][0]);
-        }).catch(err => console.log('error adding quantity', err));
     }
 }
