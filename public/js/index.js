@@ -1,4 +1,4 @@
-function searchRecipe() {
+const searchRecipe = () => {
     const inputValue = document.getElementById("search-input").value;
     console.log(inputValue);
     fetch(`https://api.edamam.com/search?q=${inputValue}&app_id=717f8301&app_key=2696b2396516b977e8b958441a26feca`)

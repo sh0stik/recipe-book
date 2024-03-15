@@ -35,32 +35,34 @@ const deleteRecipe = (recipe, card, grid) => {
 const createRecipeCard = (recipe, grid) => {
     const card = document.createElement('div');
     card.className = 'recipe-card';
-    card.innerHTML = `
-        <h3>${recipe.recipe_name}</h3>
-        <p>${recipe.recipe_description}</p>
-        <p>${recipe.recipe_instructions}</p>
-        <div class="ingredients-container"></div>
-        <button class="delete-button">Delete</button>
-        <button class="edit-button">Edit</button>
-    `;
+    createInnerHTMLForRecipeCard(card, recipe);
 
-    card.querySelector('.delete-button').addEventListener('click', (evt) => {
-        deleteRecipe(recipe, card, grid);
-    });
-
-    card.querySelector('.edit-button').addEventListener('click', (evt) => {
-        editRecipe(recipe, card, grid);
-    });
 
     card.addEventListener('click', () => {
-        toggleCardExpansion(card, recipe);
+        toggleCardExpansion(card, recipe, grid);
     });
 
     return card;
 };
 
-const toggleCardExpansion = (card, recipe) => {
+const toggleCardExpansion = (card, recipe, grid) => {
     card.classList.toggle('expanded');
+    if (card.classList.contains('expanded')) {
+        card.innerHTML += `
+        <button class="delete-button">Delete</button>
+        <button class="edit-button">Edit</button>
+    `;
+        card.querySelector('.delete-button').addEventListener('click', (evt) => {
+            deleteRecipe(recipe, card, grid);
+        });
+
+        card.querySelector('.edit-button').addEventListener('click', (evt) => {
+            editRecipe(recipe, card, grid);
+        });
+    } else {
+        card.removeChild(card.querySelector('.delete-button'));
+        card.removeChild(card.querySelector('.edit-button'));
+    }
     const ingredientsContainer = card.querySelector('.ingredients-container');
     if (card.classList.contains('expanded')) {
         ingredientsContainer.innerHTML = '<h4>Ingredients:</h4><ul class="ingredients-list"></ul>';
@@ -78,8 +80,6 @@ const toggleCardExpansion = (card, recipe) => {
         ingredientsContainer.innerHTML = '';
     }
 };
-
-
 
 const createForm = (recipe, ingredients) => {
     const form = document.createElement('form');
@@ -118,6 +118,7 @@ const createForm = (recipe, ingredients) => {
 }
 
 const editRecipe = (recipe, card, grid) => {
+    hideOtherCards(grid, card);
     fetch(`http://localhost:4004/recipe/ingredients/${recipe.recipe_id}`)
         .then(response => response.json())
         .then(ingredients => {
@@ -133,10 +134,12 @@ const editRecipe = (recipe, card, grid) => {
                 };
                 updateRecipe(recipe, updatedRecipe);
                 replaceFormWithCard(form, card);
+                unhideCards(grid);
                 refreshRecipes(grid);
             });
             replaceCardWithForm(card, form);
             form.querySelector('.cancel-button').addEventListener('click', () => {
+                unhideCards(grid);
                 replaceFormWithCard(form, card);
             });
         })
@@ -156,6 +159,31 @@ const refreshRecipes = (grid) => {
         grid.removeChild(grid.firstChild);
     }
     loadRecipes();
+}
+
+function unhideCards(grid) {
+    const cards = grid.querySelectorAll('.recipe-card');
+    cards.forEach((card) => {
+        card.classList.remove('hidden');
+    });
+}
+
+function hideOtherCards(grid, card) {
+    const cards = grid.querySelectorAll('.recipe-card');
+    cards.forEach((otherCard) => {
+        if (otherCard !== card) {
+            otherCard.classList.add('hidden');
+        }
+    });
+}
+
+function createInnerHTMLForRecipeCard(card, recipe) {
+    card.innerHTML = `
+        <h3>${recipe.recipe_name}</h3>
+        <p>${recipe.recipe_description}</p>
+        <p>${recipe.recipe_instructions}</p>
+        <div class="ingredients-container"></div>
+    `;
 }
 
 function updateRecipe(recipe, updatedRecipe) {

@@ -23,18 +23,8 @@
         <div id="search-container">
             <label for="search-input"></label>
             <input type="text" id="search-input" placeholder="Search recipes...">
-            <button id="clear-button">Clear</button>
-            <script>
-                const input = document.querySelector("#search-input");
-                const clearButton = document.querySelector("#clear-button");
-
-                clearButton.addEventListener("click", function () {
-                    input.value = "";
-                });
-            </script>
             <button id="search-button" onclick="searchRecipe()">Search</button>
         </div>
-
         <template>
             <div class="results">
                 <div class="header" data-header></div>

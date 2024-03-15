@@ -58,13 +58,13 @@ nav a {
 }
 
 nav a:hover {
-    background-color: #ff6347;
-    border: none;
+    /* border: 1px solid white;
     color: white;
     text-align: center;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 16px; */
     cursor: pointer;
+    transform: scale(1.1);
 }
 
 nav a:last-child {
@@ -82,7 +82,7 @@ nav a:last-child {
 }
 
 nav a:last-child:hover {
-    background-color: #666;
+    transform: scale(1.1);
 }
 
 button {
@@ -94,14 +94,14 @@ button {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 4px 2px;
+    margin: 5px 6px;
     cursor: pointer;
     border-radius: 25px;
     font-family: Arial, sans-serif;
 }
 
 button:hover {
-    background-color: #666;
+    transform: scale(1.1);
 }
 
 main {
@@ -133,6 +133,10 @@ main h2 {
     align-items: center;
 }
 
+.results:hover {
+    transform: scale(1.1);
+}
+
 #recipe-cards {
     display: flex;
     flex-direction: column;
@@ -148,11 +152,6 @@ main h2 {
     border: 1px solid #ddd;
     border-radius: 25px;
     transition: background-color 0.3s ease;
-}
-
-[data-header] a:hover {
-    background-color: #ff6347;
-    color: white
 }
 
 footer {
@@ -192,11 +191,11 @@ form#add-recipe-form button {
 }
 
 #add-ingredient-button {
-    background-color: #666;
+    background-color: #ff6347;
 }
 
 #add-ingredient-button:hover {
-    background-color: #ff6347;
+    border: 1px solid white;
 }
 
 #ingredients-table {
@@ -233,12 +232,22 @@ form#add-recipe-form button {
     gap: 10px;
 }
 
+#recipe-grid > form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 .recipe-card {
     border: 1px solid #ddd;
     padding: 20px;
     border-radius: 10px;
     color: #333;
+}
 
+.recipe-card:hover {
+    transform: scale(1.1);
+    cursor: pointer;
 }
 
 .recipe-card.expanded {
@@ -255,6 +264,9 @@ form#add-recipe-form button {
     box-sizing: border-box;
 }
 
+.hidden {
+    display: none;
+}
 .recipe-card h3 {
     margin: 0;
 }
@@ -269,7 +281,7 @@ form#add-recipe-form button {
 
 .delete-button,
 .edit-button {
-    background-color: #f44336;
+    background-color: #ff6347;
     color: white;
     border: none;
     cursor: pointer;
@@ -284,8 +296,7 @@ form#add-recipe-form button {
 
 .delete-button:hover,
 .edit-button:hover {
-    background-color: #666;
-    color: white;
+    transform: scale(1.1);
 }
 
 form {
@@ -319,5 +330,5 @@ form button {
 }
 
 form button:hover {
-    background-color: #666;
+    border: 1px solid white;
 }
