@@ -1,70 +1,70 @@
-require('dotenv').config()
-const { CONNECTION_STRING } = process.env
-const Sequelize = require('sequelize')
-
-const sequelize = new Sequelize(CONNECTION_STRING, { dialect: 'postgres' });
+const ingredientService = require('../services/ingredientService');
 
 module.exports = {
-    addIngredient: (req, res) => {
+    addIngredient: async (req, res) => {
         const { ingredient_name, unit } = req.body;
-
-        sequelize.query(`
-                INSERT INTO ingredients (ingredient_name, unit)
-                VALUES 
-                    ('${ingredient_name}', '${unit}')
-                RETURNING *
-            `).then((ingredient) => {
-            res.status(200).send(ingredient[0][0]);
-        }).catch(err => console.log('error adding ingredient', err))
+        try {
+            const ingredient = await ingredientService.addIngredient(ingredient_name, unit);
+            res.status(200).send(ingredient);
+        } catch (err) {
+            console.log('error adding ingredient', err);
+            res.status(500).send('Error adding ingredient');
+        }
     },
 
 
-    updateIngredient: (req, res) => {
+    updateIngredient: async (req, res) => {
         const { ingredient_id } = req.params
         const { ingredient_name, unit } = req.body
-        sequelize.query(`
-            UPDATE ingredients
-            SET ingredient_name = '${ingredient_name}', unit = '${unit}'
-            WHERE ingredient_id = ${ingredient_id}
-        `).then((ingredient) => {
-            res.status(200).send(ingredient[0][0])
-        }).catch(err => console.log('error updating ingridient', err))
-    },
-
-    deleteIngredient: (req, res) => {
-        const { ingredient_id } = req.params
-        sequelize.query(`
-            DELETE FROM ingredients
-            WHERE ingredient_id = ${ingredient_id}
-        `).then(() => {
-            res.status(200).send('Ingridient deleted')
-        }).catch(err => console.log('error deleting ingridient', err))
-    },
-
-    getIngredientById: (req, res) => {
-        const { ingredient_id } = req.params
-        sequelize.query(`
-            SELECT * FROM ingredients
-            WHERE ingredient_id = ${ingredient_id}
-        `).then(ingredient => {
+        try {
+            const ingredient = await ingredientService.updateIngredient(ingredient_id, ingredient_name, unit)
             res.status(200).send(ingredient)
-        }).catch(err => console.log('error getting ingridient by id', err))
+        } catch (err) {
+            console.log('error updating ingredient', err)
+            res.status(500).send('Error updating ingredient')
+        }
     },
 
-    getIngredients: (req, res) => {
-        sequelize.query('SELECT * FROM ingredients').then(response => {
-            res.status(200).send(response[0])
-        }).catch(err => console.log('error getting ingredients', err))
+    deleteIngredient: async (req, res) => {
+        const { ingredient_id } = req.params
+        try {
+            await ingredientService.deleteIngredient(ingredient_id)
+            res.status(200).send('Ingredient deleted')
+        } catch (err) {
+            console.log('error deleting ingredient', err)
+            res.status(500).send('Error deleting ingredient')
+        }
     },
 
-    getIngredientByName: (req, res) => { 
+    getIngredientById: async (req, res) => {
+        const { ingredient_id } = req.params
+        try {
+            const ingredient = await ingredientService.getIngredientById(ingredient_id)
+            res.status(200).send(ingredient)
+        } catch (err) {
+            console.log('error getting ingredient by id', err)
+            res.status(500).send('Error getting ingredient by id')
+        }
+    },
+
+    getIngredients: async (req, res) => {
+        try {
+            const ingredients = await ingredientService.getIngredients()
+            res.status(200).send(ingredients)
+        } catch (err) {
+            console.log('error getting ingredients', err)
+            res.status(500).send('Error getting ingredients')
+        }
+    },
+
+    getIngredientByName: async (req, res) => {
         const { ingredient_name } = req.params
-        sequelize.query(`
-            SELECT ingredient_id FROM ingredients
-            WHERE ingredient_name = '${ingredient_name}'
-        `).then(response => {
-            res.status(200).send(response[0][0])
-        }).catch(err => console.log('error getting ingredient id by name', err))
+        try {
+            const ingredients = await ingredientService.getIngredientByName(ingredient_name)
+            res.status(200).send(ingredient)
+        } catch (err) {
+            console.log('error getting ingredient by name', err)
+            res.status(500).send('Error getting ingredient by name')
+        }
     }
-
 }

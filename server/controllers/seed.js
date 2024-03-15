@@ -7,8 +7,7 @@ const sequelize = new Sequelize(CONNECTION_STRING, { dialect: 'postgres' });
 module.exports = {
     seed: (req, res) => {
         Promise.all([
-            sequelize.query('DROP TABLE IF EXISTS recipe_ingredients')
-                .then(() => sequelize.query('DROP TABLE IF EXISTS recipes'))
+            sequelize.query(sequelize.query('DROP TABLE IF EXISTS recipes'))
                 .then(() => sequelize.query('DROP TABLE IF EXISTS ingredients'))
         ]).then(() => {
             return Promise.all([
@@ -23,20 +22,13 @@ module.exports = {
                 sequelize.query(`
                     CREATE TABLE ingredients (
                         ingredient_id SERIAL PRIMARY KEY,
-                        ingredient_name VARCHAR(100) UNIQUE,
-                        unit VARCHAR(100)
+                        recipe_id INTEGER REFERENCES recipes(recipe_id),
+                        ingredient_name VARCHAR(100),
+                        quantity FLOAT,
+                        units VARCHAR(100)
                     )
                 `)
             ]);
-        }).then(() => {
-            return sequelize.query(`
-                CREATE TABLE recipe_ingredients (
-                    id SERIAL PRIMARY KEY,
-                    recipe_id INTEGER REFERENCES recipes(recipe_id),
-                    ingredient_id INTEGER REFERENCES ingredients(ingredient_id),
-                    quantity FLOAT
-                )
-            `);
         }).then(() => {
             return Promise.all([
                 sequelize.query(`
@@ -47,44 +39,24 @@ module.exports = {
                         ('Chocolate Chip Cookies', 'A classic dessert', 'Beat the butter and sugars, then beat in the eggs and vanilla. Dissolve the baking soda in hot water and add to the mixture. Stir in the flour, chocolate chips, and walnuts. Drop dough onto a prepared baking sheet. Bake until the edges are golden brown.')
                 `),
                 sequelize.query(`
-                    INSERT INTO ingredients (ingredient_name, unit)
+                    INSERT INTO ingredients (recipe_id, ingredient_name, quantity, units)
                     VALUES 
-                        ('pasta', 'grams'),
-                        ('sauce', 'milliliters'),
-                        ('chicken', 'grams'),
-                        ('fettuccine', 'grams'),
-                        ('heavy cream', 'grams'),
-                        ('garlic', 'cloves'),
-                        ('parmesan cheese', 'grams'),
-                        ('butter', 'grams'),
-                        ('sugar', 'grams'),
-                        ('eggs', 'units'),
-                        ('vanilla', 'teaspoons'),
-                        ('baking soda', 'grams'),
-                        ('hot water', 'milliliters'),
-                        ('flour', 'grams'),
-                        ('chocolate chips', 'grams')
-                `),
-                sequelize.query(`
-                    INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-                    VALUES 
-                    (1, 1, 200),  
-                    (1, 2, 100),  
-                    (2, 3, 500),  
-                    (2, 4, 200),  
-                    (2, 5, 100),  
-                    (2, 6, 2),    
-                    (2, 7, 50),   
-                    (3, 8, 100),  
-                    (3, 9, 200),  
-                    (3, 10, 2),   
-                    (3, 11, 1),   
-                    (3, 12, 1),   
-                    (3, 13, 50),  
-                    (3, 14, 300), 
-                    (3, 15, 200)  
+                    (1, 'pasta', 200, 'grams'),
+                    (1, 'sauce', 100, 'milliliters'),
+                    (2, 'chicken', 500, 'grams'),
+                    (2, 'fettuccine', 200, 'grams'),
+                    (2, 'heavy cream', 100, 'grams'),
+                    (2, 'garlic', 2, 'cloves'),
+                    (2, 'parmesan cheese', 50, 'grams'),
+                    (3, 'butter', 100, 'grams'),
+                    (3, 'sugar', 200, 'grams'),
+                    (3, 'eggs', 2, 'units'),
+                    (3, 'vanilla', 1, 'teaspoons'),
+                    (3, 'baking soda', 1, 'grams'),
+                    (3, 'hot water', 50, 'milliliters'),
+                    (3, 'flour', 300, 'grams'),
+                    (3, 'chocolate chips', 200, 'grams')
                 `)
-
             ]);
         }).then(() => {
             res.status(200).send('Database seeded');
