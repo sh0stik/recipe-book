@@ -1,10 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
-import logo from './logo.svg';
 import './App.css';
 import { Home } from './components/Home';
-import {Recipes} from './components/Recipes';
-import {AddRecipe} from './components/AddRecipe';
+import { Recipes, RecipeDetails } from './components/Recipes';
+import { AddRecipe } from './components/AddRecipe';
 
 function App() {
   return (
@@ -24,12 +23,13 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/recipes" element={<Recipes />} />
+            <Route path="/recipes/:id" element={<RecipeDetails />} />
             <Route path="/add-recipe" element={<AddRecipe />} />
           </Routes>
         </main>
         <footer>
-        <p>&copy; 2024 Recipe Book</p>
-    </footer>
+          <p>&copy; 2024 Recipe Book</p>
+        </footer>
       </div>
     </Router>
   );

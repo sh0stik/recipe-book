@@ -6,31 +6,26 @@ const sequelize = new Sequelize(CONNECTION_STRING, { dialect: 'postgres' });
 
 module.exports = {
     seed: (req, res) => {
-        Promise.all([
-            sequelize.query('DROP TABLE IF EXISTS recipes'),
-            sequelize.query('DROP TABLE IF EXISTS ingredients')
-        ]).then(() => {
-            return Promise.all([
-                sequelize.query(`
-                    CREATE TABLE recipes (
-                        recipe_id SERIAL PRIMARY KEY,
-                        recipe_name VARCHAR(100),
-                        recipe_description TEXT,
-                        recipe_instructions TEXT
-                    )
-                `),
-                sequelize.query(`
-                    CREATE TABLE ingredients (
-                        ingredient_id SERIAL PRIMARY KEY,
-                        recipe_id INTEGER REFERENCES recipes(recipe_id),
-                        ingredient_name VARCHAR(100),
-                        quantity FLOAT,
-                        units VARCHAR(100)
-                    )
-                `)
-            ]);
-        }).then(() => {
-            return Promise.all([
+        sequelize.query('DROP TABLE IF EXISTS ingredients')
+            .then(() => sequelize.query('DROP TABLE IF EXISTS recipes'))
+            .then(() => sequelize.query(`
+                CREATE TABLE recipes (
+                    recipe_id SERIAL PRIMARY KEY,
+                    recipe_name VARCHAR(100),
+                    recipe_description TEXT,
+                    recipe_instructions TEXT
+                )
+            `))
+            .then(() => sequelize.query(`
+                CREATE TABLE ingredients (
+                    ingredient_id SERIAL PRIMARY KEY,
+                    recipe_id INTEGER REFERENCES recipes(recipe_id),
+                    ingredient_name VARCHAR(100),
+                    quantity FLOAT,
+                    units VARCHAR(100)
+                )
+            `))
+            .then(() => Promise.all([
                 sequelize.query(`
                     INSERT INTO recipes (recipe_name, recipe_description, recipe_instructions)
                     VALUES 
@@ -57,9 +52,10 @@ module.exports = {
                     (3, 'flour', 300, 'grams'),
                     (3, 'chocolate chips', 200, 'grams')
                 `)
-            ]);
-        }).then(() => {
-            res.status(200).send('Database seeded');
-        }).catch(err => console.log('error seeding DB', err));
+            ]))
+            .then(() => {
+                res.status(200).send('Database seeded');
+            })
+            .catch(err => console.log('error seeding DB', err));
     }
 }

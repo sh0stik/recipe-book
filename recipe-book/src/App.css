@@ -105,6 +105,7 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 74.8vh;
 }
 
 main h2 {
@@ -130,7 +131,7 @@ main h2 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 74.8vh;
 }
 
 #search-container h2 {
