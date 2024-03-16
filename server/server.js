@@ -4,7 +4,8 @@ const app = express()
 const cors = require('cors')
 const { SERVER_PORT } = process.env
 const { seed } = require('./controllers/seed')
-const {addOrUpdateRecipe, getRecipe, getRecipes, deleteRecipe} = require('./controllers/recipeDtoController')
+const {addRecipe, updateRecipe,  getRecipe, getRecipes, deleteRecipe} = require('./controllers/recipeDtoController')
+const {searchRecipe} = require('./controllers/searchController')
 
 app.use(express.json())
 app.use(cors())
@@ -15,8 +16,10 @@ app.post('/seed', seed)
 
 app.get('/recipes', getRecipes)
 app.get('/recipes/:recipe_id', getRecipe)
-app.post('/recipes', addOrUpdateRecipe)
-app.put('/recipes/:recipe_id', addOrUpdateRecipe)
+app.post('/recipes', addRecipe)
+app.put('/recipes/:recipe_id', updateRecipe)
 app.delete('/recipes/:recipe_id', deleteRecipe)
+
+app.get('/search', searchRecipe)
 
 app.listen(SERVER_PORT, () => console.log(`Server is running on ${SERVER_PORT}`))

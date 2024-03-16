@@ -1,17 +1,17 @@
 const Recipe = require('./recipe');
-const RecipeIngredients = require('./recipeIngredient');
+const Ingredient = require('./Ingredient');
 
-Recipe.hasMany(RecipeIngredients, {
+Recipe.hasMany(Ingredient, {
   foreignKey: 'recipe_id',
-  as: 'recipeIngredients'
+  as: 'ingredients'
 });
 
-RecipeIngredients.belongsTo(Recipe, {
+Ingredient.belongsTo(Recipe, {
   foreignKey: 'recipe_id',
   as: 'recipe'
 });
 
 module.exports = {
   Recipe,
-  RecipeIngredients
+  Ingredient
 };

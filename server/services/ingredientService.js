@@ -1,12 +1,12 @@
-const Ingredient = require('../models/ingredient');
+const { Ingredient } = require('../models');
 
-const addIngredient = async (ingredient_name, units) => {
-    const ingredient = await Ingredient.create({ ingredient_name, units });
+const addIngredient = async (recipe_id, ingredient_name, quantity, units) => {
+    const ingredient = await Ingredient.create({ recipe_id, ingredient_name, quantity, units });
     return ingredient;
 }
 
-const updateIngredient = async (ingredient_id, ingredient_name, units) => {
-    await Ingredient.update({ ingredient_name, units }, { where: { ingredient_id } });
+const updateIngredient = async (ingredient_id, recipe_id, ingredient_name, quantity, units) => {
+    await Ingredient.update({ recipe_id, ingredient_name, quantity, units }, { where: { ingredient_id } });
 }
 
 const deleteIngredient = async (ingredient_id) => {
@@ -23,9 +23,9 @@ const getIngredients = async () => {
     return ingredients;
 }
 
-const getIngredientByName = async (ingredient_name) => {
-    const ingredient = await Ingredient.findOne({ where: { ingredient_name } });
-    return ingredient;
+const getIngredientsByRecipeId = async (recipe_id) => {
+    const ingredients = await Ingredient.findAll({ where: { recipe_id } });
+    return ingredients;
 }
 
 module.exports = {
@@ -34,5 +34,5 @@ module.exports = {
     deleteIngredient,
     getIngredientById,
     getIngredients,
-    getIngredientByName
+    getIngredientsByRecipeId
 };

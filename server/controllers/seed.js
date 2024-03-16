@@ -7,8 +7,8 @@ const sequelize = new Sequelize(CONNECTION_STRING, { dialect: 'postgres' });
 module.exports = {
     seed: (req, res) => {
         Promise.all([
-            sequelize.query(sequelize.query('DROP TABLE IF EXISTS recipes'))
-                .then(() => sequelize.query('DROP TABLE IF EXISTS ingredients'))
+            sequelize.query('DROP TABLE IF EXISTS recipes'),
+            sequelize.query('DROP TABLE IF EXISTS ingredients')
         ]).then(() => {
             return Promise.all([
                 sequelize.query(`

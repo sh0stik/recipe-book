@@ -1,4 +1,4 @@
-const { Recipe } = require('../models');
+const { Recipe, Ingredient } = require('../models');
 
 const addRecipe = async (recipe_name, recipe_description, recipe_instructions) => {
     const recipe = await Recipe.create({ recipe_name, recipe_description, recipe_instructions });
@@ -20,7 +20,13 @@ const getRecipeById = async (recipe_id) => {
 }
 
 const getRecipes = async () => {
-    const recipes = await Recipe.findAll();
+    const recipes = await Recipe.findAll({
+        include: [{
+            model: Ingredient,
+            as: 'ingredients',
+            required: false,
+        }]
+    });
     return recipes;
 }
 

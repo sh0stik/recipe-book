@@ -12,7 +12,16 @@ Ingredient.init({
         primaryKey: true,
         autoIncrement: true
     },
+    recipe_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    
     ingredient_name: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    quantity: {
         type: DataTypes.STRING,
         allowNull: false
     },
