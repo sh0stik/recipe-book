@@ -1,3 +1,4 @@
+
 const searchRecipe = () => {
     const inputValue = document.getElementById("search-input").value;
     console.log(inputValue);

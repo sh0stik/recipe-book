@@ -1,38 +1,348 @@
-.App {
-  text-align: center;
+body,
+header {
+    margin: 0;
+    padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #666;
+    border: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+header h1 {
+    margin: 0;
+    font-weight: 300;
+    color: white;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+nav {
+    display: flex;
 }
 
-.App-link {
-  color: #61dafb;
+@media screen and (max-width: 600px) {
+    nav {
+        display: none;
+        font-family: Arial, sans-serif;
+    }
+
+    header::after {
+        content: '...';
+        display: block;
+        text-align: right;
+        color: white;
+    }
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+body {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    height: 100vh;
+    margin: 0;
+    background-color: #f2f2f2;
+    font-family: Arial, sans-serif;
+    overflow-y: scroll;
+}
+
+
+nav a {
+    color: white;
+    font-weight: 300;
+    margin-right: 20px;
+    text-decoration: none;
+    padding: 15px 32px;
+    display: inline-block;
+    border-radius: 25px;
+}
+
+nav a:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+nav a:last-child {
+    background-color: #ff6347;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 25px;
+}
+
+nav a:last-child:hover {
+    transform: scale(1.1);
+}
+
+button {
+    background-color: #ff6347;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 5px 6px;
+    cursor: pointer;
+    border-radius: 25px;
+    font-family: Arial, sans-serif;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+main {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+main h2 {
+    color: #666;
+    font-weight: 300;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#search-input {
+    width: 300px;
+    height: 50px;
+    border-radius: 25px;
+    font-size: 16px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+#search-container {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#search-container h2 {
+    color: #666;
+    font-weight: 300;
+}
+
+#search-bar {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.results:hover {
+    transform: scale(1.1);
+}
+
+#recipe-cards {
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    justify-content: center;
+    align-items: center;
+}
+
+.recipe-cards a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    transition: background-color 0.3s ease;
+}
+
+footer {
+    display: flex;
+    position: flex;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #666;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+
+form#add-recipe-form {
+    width: 80%;
+    margin: 0 auto;
+}
+
+form#add-recipe-form input[type="text"],
+form#add-recipe-form input[type="number"],
+form#add-recipe-form textarea,
+form#add-recipe-form select {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    box-sizing: border-box;
+    border-radius: 25px;
+    font-family: Arial, sans-serif;
+}
+
+form#add-recipe-form button {
+    color: white;
+    padding: 10px 20px;
+    margin: 10px 0;
+    border: none;
+    cursor: pointer;
+}
+
+#add-ingredient-button {
+    background-color: #ff6347;
+}
+
+#add-ingredient-button:hover {
+    border: 1px solid white;
+}
+
+#ingredients-table {
+    width: 80%;
+    border-collapse: collapse;
+}
+
+#ingredients-table th,
+#ingredients-table td {
+    border: none;
+    padding: 8px;
+}
+
+#ingredients-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.ingredients {
+    display: flex;
+    align-items: center;
+}
+
+#ingredients-table {
+    flex-grow: 1;
+}
+
+#add-ingredient-button {
+    margin-left: 20px;
+}
+
+#recipe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+}
+
+#recipe-grid > form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.recipe-card {
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 10px;
+    color: #333;
+}
+
+.recipe-card:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.recipe-card.expanded {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    background: white;
+    width: 60%;
+    height: 60%;
+    overflow: auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.hidden {
+    display: none;
+}
+.recipe-card h3 {
+    margin: 0;
+}
+
+.recipe-card p {
+    display: none;
+}
+
+.recipe-card.expanded p {
+    display: block;
+}
+
+.delete-button,
+.edit-button {
+    background-color: #ff6347;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+}
+
+.delete-button:hover,
+.edit-button:hover {
+    transform: scale(1.1);
+}
+
+form {
+    width: 80%;
+    margin: 0 auto;
+}
+
+form input[type="text"],
+form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    box-sizing: border-box;
+    border-radius: 25px;
+    font-family: Arial, sans-serif;
+}
+
+form button {
+    background-color: #ff6347;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 25px;
+    font-family: Arial, sans-serif;
+}
+
+form button:hover {
+    border: 1px solid white;
 }
