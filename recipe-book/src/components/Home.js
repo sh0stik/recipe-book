@@ -9,6 +9,7 @@ export function Home() {
             .then(response => response.json())
             .then(data => {
                 setRecipes(data);
+                setInputValue('');
             })
             .catch(error => console.error('Error:', error));
     };
@@ -16,17 +17,9 @@ export function Home() {
     return (
         <div>
             <div id="search-container">
-            <h2>Search Recipes</h2>
+                <h2>Search Recipes</h2>
                 <div id="search-bar">
-                    <input
-                        type="text"
-                        id="search-input"
-                        placeholder="Search recipes..."
-                        value={inputValue}
-                        onChange={e => setInputValue(e.target.value)}
-                    /><button id="clear-button" onClick={() => setInputValue('')}>
-                        Clear
-                    </button>
+                    <input type="search" id="search-input" placeholder="Search recipes..." value={inputValue} onChange={e => setInputValue(e.target.value)}/>
                     <button id="search-button" onClick={searchRecipe}>
                         Search
                     </button>
@@ -39,6 +32,6 @@ export function Home() {
                     ))}
                 </div>
             </div>
-        </div>
+        </div >
     );
 }

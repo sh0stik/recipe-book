@@ -10,6 +10,10 @@ header {
     align-items: center;
     background-color: #666;
     border: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
 }
 
 header h1 {
@@ -37,15 +41,16 @@ nav {
 }
 
 body {
-    display: grid;
-    grid-template-rows: auto 1fr auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     height: 100vh;
     margin: 0;
     background-color: #f2f2f2;
     font-family: Arial, sans-serif;
     overflow-y: scroll;
 }
-
 
 nav a {
     color: white;
@@ -57,7 +62,8 @@ nav a {
     border-radius: 25px;
 }
 
-nav a:hover {
+nav a:hover,
+nav a:last-child:hover {
     cursor: pointer;
     transform: scale(1.1);
 }
@@ -76,11 +82,8 @@ nav a:last-child {
     border-radius: 25px;
 }
 
-nav a:last-child:hover {
-    transform: scale(1.1);
-}
-
-button {
+button,
+nav a:last-child {
     background-color: #ff6347;
     border: none;
     color: white;
@@ -95,7 +98,8 @@ button {
     font-family: Arial, sans-serif;
 }
 
-button:hover {
+button:hover,
+nav a:last-child:hover {
     transform: scale(1.1);
 }
 
@@ -105,7 +109,6 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 74.8vh;
 }
 
 main h2 {
@@ -125,13 +128,20 @@ main h2 {
     box-sizing: border-box;
 }
 
+#search-input::-webkit-search-cancel-button {
+    -webkit-appearance: searchfield-cancel-button;
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+}
+
 #search-container {
+    margin-top: 50px;
     font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 74.8vh;
 }
 
 #search-container h2 {
@@ -170,7 +180,7 @@ main h2 {
 
 footer {
     display: flex;
-    position: flex;
+    position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;
@@ -181,36 +191,20 @@ footer {
 }
 
 form#add-recipe-form {
-    width: 80%;
+    width: auto;
     margin: 0 auto;
 }
 
-form#add-recipe-form input[type="text"],
-form#add-recipe-form input[type="number"],
-form#add-recipe-form textarea,
-form#add-recipe-form select {
+input[type="text"],
+input[type="number"],
+textarea,
+select {
     width: 100%;
     padding: 10px;
     margin: 5px 0;
     box-sizing: border-box;
     border-radius: 25px;
     font-family: Arial, sans-serif;
-}
-
-form#add-recipe-form button {
-    color: white;
-    padding: 10px 20px;
-    margin: 10px 0;
-    border: none;
-    cursor: pointer;
-}
-
-#add-ingredient-button {
-    background-color: #ff6347;
-}
-
-#add-ingredient-button:hover {
-    border: 1px solid white;
 }
 
 #ingredients-table {
@@ -239,6 +233,7 @@ form#add-recipe-form button {
 
 #add-ingredient-button {
     margin-left: 20px;
+    white-space: nowrap;
 }
 
 #recipe-grid {
@@ -247,7 +242,7 @@ form#add-recipe-form button {
     gap: 10px;
 }
 
-#recipe-grid > form {
+#recipe-grid>form {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -258,6 +253,17 @@ form#add-recipe-form button {
     padding: 20px;
     border-radius: 10px;
     color: #333;
+    position: relative;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: white;
+    border: none;
+    color: #333;
+    opacity: 0.5;
 }
 
 .recipe-card:hover {
@@ -282,6 +288,7 @@ form#add-recipe-form button {
 .hidden {
     display: none;
 }
+
 .recipe-card h3 {
     margin: 0;
 }
@@ -294,27 +301,7 @@ form#add-recipe-form button {
     display: block;
 }
 
-.delete-button,
-.edit-button {
-    background-color: #ff6347;
-    color: white;
-    border: none;
-    cursor: pointer;
-    padding: 5px 10px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    transition-duration: 0.4s;
-}
-
-.delete-button:hover,
-.edit-button:hover {
-    transform: scale(1.1);
-}
-
-form {
+.update-form {
     width: 80%;
     margin: 0 auto;
 }
@@ -327,23 +314,4 @@ form textarea {
     box-sizing: border-box;
     border-radius: 25px;
     font-family: Arial, sans-serif;
-}
-
-form button {
-    background-color: #ff6347;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 25px;
-    font-family: Arial, sans-serif;
-}
-
-form button:hover {
-    border: 1px solid white;
 }
