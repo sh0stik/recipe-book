@@ -28,7 +28,6 @@ export function AddRecipe() {
                 units: ingredient.unit
             }))
         }
-        console.log(recipe.ingredients);
         try {
             await axios.post('http://localhost:4004/recipes', recipe);
         } catch (error) {

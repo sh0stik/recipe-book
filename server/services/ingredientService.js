@@ -6,7 +6,7 @@ const addIngredient = async (recipe_id, ingredient_name, quantity, units) => {
 }
 
 const updateIngredient = async (ingredient_id, recipe_id, ingredient_name, quantity, units) => {
-    await Ingredient.update({ recipe_id, ingredient_name, quantity, units }, { where: { ingredient_id } });
+    return await Ingredient.update({ recipe_id, ingredient_name, quantity, units }, { where: { ingredient_id } });
 }
 
 const deleteIngredient = async (ingredient_id) => {

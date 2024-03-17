@@ -32,10 +32,13 @@ const updateRecipe = async (recipeDto) => {
         recipeDto.recipe_instructions,
         recipeDto.ingredients
     );
-    await recipeService.updateRecipe(recipeFromDto.recipe_id, recipeFromDto.recipe_name, recipeFromDto.recipe_description, recipeFromDto.recipe_instructions);
-    recipeFromDto.ingredients.forEach(async (ingredient) => {
+    const recipe = await recipeService.updateRecipe(recipeFromDto.recipe_id, recipeFromDto.recipe_name, recipeFromDto.recipe_description, recipeFromDto.recipe_instructions);
+    console.log(recipe);
+    const ingredients = await Promise.all(recipeFromDto.ingredients.map(async (ingredient) => {
         await ingredientService.updateIngredient(ingredient.ingredient_id, recipeFromDto.recipe_id, ingredient.ingredient_name, ingredient.quantity, ingredient.units);
-    });
+        return ingredient;
+    }));
+     return RecipeDto.fromRecipe(recipe, ingredients);
 }
 
 const getRecipes = async () => {

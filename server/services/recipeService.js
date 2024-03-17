@@ -6,8 +6,11 @@ const addRecipe = async (recipe_name, recipe_description, recipe_instructions) =
 }
 
 const updateRecipe = async (recipe_id, recipe_name, recipe_description, recipe_instructions) => {
-    const recipe = await Recipe.update({ recipe_name, recipe_description, recipe_instructions }, { where: { recipe_id } });
-    return recipe;
+    const [_, [updatedRecipe]] = await Recipe.update(
+        { recipe_name, recipe_description, recipe_instructions },
+        { where: { recipe_id }, returning: true }
+    );
+    return updatedRecipe;
 }
 
 const deleteRecipe = async (recipe_id) => {

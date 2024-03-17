@@ -16,8 +16,9 @@ module.exports = {
     updateRecipe: async (req, res) => {
         const recipeDto = req.body;
         try {
-            await recipeDtoService.updateRecipe(recipeDto);
-            res.status(200).send('Recipe updated');
+            const recipe = await recipeDtoService.updateRecipe(recipeDto);
+            console.log(recipe);
+            res.status(200).send(recipe);
         } catch (err) {
             console.log('error updating recipe', err);
             res.status(500).send('Error updating recipe');

@@ -188,6 +188,7 @@ footer {
     color: white;
     text-align: center;
     padding: 10px 0;
+    justify-content: center;
 }
 
 form#add-recipe-form {
