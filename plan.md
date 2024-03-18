@@ -4,13 +4,13 @@
 
 ### 1. Add and Update Recipes:
 - Users can add and update recipes.
-- Each recipe should have a name, description, list of ingredients, cooking instructions, and other relevant details.
+- Each recipe should have a name, description, list of ingredients, and cooking instructions.
 
 ### 2. Delete Recipes:
-- Users can delete recipes from the RecipeBox application.
+- Users can delete recipes.
 
 ### 3. Search Functionality:
-- Users can search for recipes based on keywords, ingredients, cooking time, difficulty level, etc. through an API.
+- Users can search for recipes based on keywords or ingredients through an API.
 - The frontend will make requests to the backend API to perform the search.
 - The backend will handle the search query and return the results to the frontend.
     
@@ -19,21 +19,19 @@
 ### 1. Home Page:
 - Header with navigation links (Home, Recipes, Add Recipe)
 - Search bar for searching recipes
-- Featured recipes section (optional)
 
 ### 2. Recipe Detail Page:
-- Display recipe name, description, ingredients, instructions, and other details
+- Display recipe name, description, ingredients, and instructions
 - Edit and delete buttons
-- Related recipes section (optional)
 
-### 3. Add/Edit Recipe Page:
-- Form for adding or editing a recipe
-- Input fields for recipe name, description, ingredients, instructions, etc.
+### 3. Add Recipe Page:
+- Form for adding a recipe
+- Input fields for recipe name, description, ingredients, instructions.
 
 ## To-Do List for Coding
 
 ### 1. Backend Development:
-- Set up database schema (Recipes, Ingredients, etc.)
+- Set up database schema (Recipes, Ingredients)
 - Implement CRUD operations for recipes and ingredients
 - Develop search functionality
 - Create API endpoints for interacting with the frontend

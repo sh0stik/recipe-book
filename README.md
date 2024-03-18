@@ -1,13 +1,47 @@
 # Recipe Book
-A web application that allows users save and update their favorite recipes, delete and search new recipes .
+Recipe Book is a web application designed to help you manage your favorite recipes.  Save, update, and delete them with ease, or search for new culinary inspiration. Recipe Book keeps your kitchen organized and your taste buds happy!
 
-## Features
-* Search for recipes based on ingredient or recipe name
-* Save favorite recipes for quick access
-* View recipe details and instructions
+## MVP Goals:
+* Users can search for recipes based on ingredient or recipe name
+* Users can add favorite recipes 
+* Users can view recipe details and instructions
+* Users can delete recipe
+
 ## Technologies
+* JavaScript
+* Express
+* PostgreSQL
+* React
+* Node.js 
 * HTML
 * CSS
-* JavaScript
+
+## Screenshots
+### Home page
+![Home page](/screenshoots/home.png)
+### Recipes
+![All recipes](/screenshoots/recipes.png)
+### Recipe card
+![Recipe card](/screenshoots/recipe%20card.png)
+### Edit recipe
+![Edit recipe](/screenshoots/edit.png)
+### Add recipe
+![Add recipe](/screenshoots/add.png)
+
 ## Getting Started
-To run this project, simply clone or download the repository and open the index.html file in your web browser.
+* Clone or download the repository
+* Open the folder with the app and install all dependencies by running `npm install` 
+* Create `.env` file and add `SERVER_PORT=`, `CONNECTION_STRING=postgresql://postgres:PASSWORD@SERVER:PORT/YOU_DATABASE_NAME`, and `API_KEY=` for Edamam api 
+* Run server by `node server/server.js`
+* Go to recipe-book folder and run `npm install` 
+* Run fronend by `npm start`
+
+## Dependencies
+* Node.js
+* Axios    
+* Cors
+* Dotenv
+* Express
+* Sequelize
+* PostgreSQL
+* [API_KEY](https://www.edamam.com/) 

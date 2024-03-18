@@ -71,9 +71,9 @@ export function RecipeDetails({ recipe, handleDelete, handleSave }) {
         axios.put(`http://localhost:4004/recipes/${recipe.recipe_id}`, recipeToUpdate)
             .then(response => {
                 setIsEditing(false);
-                setRecipe({ ...response.data }); 
+                setRecipe({ ...response.data });
                 setIsExpanded(true);
-                handleSave(response.data); 
+                handleSave(response.data);
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -89,13 +89,12 @@ export function RecipeDetails({ recipe, handleDelete, handleSave }) {
     return (
         <div className={`recipe-card ${isExpanded ? 'expanded' : ''}`}
             onClick={() => !isExpanded && setIsExpanded(true)}>
-
-            {isEditing ? (
+                {isEditing ? (
                 <form className='update-form' onSubmit={saveRecipe}>
                     <h2>Edit Recipe</h2>
                     <label>
                         Recipe Name:
-                        <input type="text" value={recipeToUpdate.recipe_name} onChange={e => setRecipe({ ...recipeToUpdate, recipe_name: e.target.value })} />
+                        <input type="text" value={recipeToUpdate.recipe_name}onChange={e => setRecipe({...recipeToUpdate, recipe_name: e.target.value })} />
                     </label>
                     <label>
                         Description:
@@ -162,10 +161,13 @@ export function RecipeDetails({ recipe, handleDelete, handleSave }) {
 }
 RecipeDetails.propTypes = {
     recipe: PropTypes.shape({
+        recipe_id: PropTypes.number,
         recipe_name: PropTypes.string,
         recipe_description: PropTypes.string,
         recipe_instructions: PropTypes.string,
         ingredients: PropTypes.arrayOf(PropTypes.shape({
+            ingredient_id: PropTypes.number,
+            recipe_id: PropTypes.number,
             ingredient_name: PropTypes.string,
             quantity: PropTypes.number,
             units: PropTypes.string,
