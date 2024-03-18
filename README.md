@@ -31,10 +31,11 @@ Recipe Book is a web application designed to help you manage your favorite recip
 ## Getting Started
 * Clone or download the repository
 * Open the folder with the app and install all dependencies by running `npm install` 
-* Create `.env` file and add `SERVER_PORT=`, `CONNECTION_STRING=postgresql://postgres:PASSWORD@SERVER:PORT/YOU_DATABASE_NAME`, and `API_KEY=` for Edamam api 
+* Create `.env` file and add `SERVER_PORT=`, `CONNECTION_STRING=postgresql://postgres:${PASSWORD}@${SERVER}:${PORT}/${YOU_DATABASE_NAME}`, and `API_KEY=` for Edamam api 
 * Run server by `node server/server.js`
 * Go to recipe-book folder and run `npm install` 
 * Run fronend by `npm start`
+* Seed data base `http://${SERVER}:${PORT}/seed`
 
 ## Dependencies
 * Node.js
