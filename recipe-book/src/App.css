@@ -308,6 +308,7 @@ select {
 }
 
 form input[type="text"],
+input[type="password"],
 form textarea {
     width: 100%;
     padding: 10px;
@@ -315,4 +316,38 @@ form textarea {
     box-sizing: border-box;
     border-radius: 25px;
     font-family: Arial, sans-serif;
+}
+
+.auth-container {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.auth-container h2 {
+    margin-top: 0;
+}
+
+.auth-container form {
+    display: flex;
+    flex-direction: column;
+    border-radius: 25px;
+}
+
+.auth-container input,
+.auth-container button {
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.auth-container button {
+    background-color: #ff6347;
+    color: white;
+    border: none;
+    cursor: pointer;
 }

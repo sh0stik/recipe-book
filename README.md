@@ -16,16 +16,26 @@ Recipe Book is a web application designed to help you manage your favorite recip
 * HTML
 * CSS
 
-## Screenshots
+## Recipe Book app
 ### Home page
+On the Home page User can search for a new recipe
+
 ![Home page](/screenshoots/home.png)
 ### Recipes
+Recipes page shows all added recipes 
+
 ![All recipes](/screenshoots/recipes.png)
 ### Recipe card
+Recipe card shows full recipe information (title, description, instructions, ingredients)
+
 ![Recipe card](/screenshoots/recipe%20card.png)
 ### Edit recipe
+User can edit any field in recipe, to save changes - needs to click 'Save'
+
 ![Edit recipe](/screenshoots/edit.png)
 ### Add recipe
+From Add recipe page User can save their own recipes
+
 ![Add recipe](/screenshoots/add.png)
 
 ## Getting Started

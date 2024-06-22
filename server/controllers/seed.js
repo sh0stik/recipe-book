@@ -8,6 +8,7 @@ module.exports = {
     seed: (req, res) => {
         sequelize.query('DROP TABLE IF EXISTS ingredients')
             .then(() => sequelize.query('DROP TABLE IF EXISTS recipes'))
+            .then(() => sequelize.query('DROP TABLE IF EXISTS users'))
             .then(() => sequelize.query(`
                 CREATE TABLE recipes (
                     recipe_id SERIAL PRIMARY KEY,
@@ -25,6 +26,13 @@ module.exports = {
                     units VARCHAR(100)
                 )
             `))
+            .then(() => sequelize.query(`
+                CREATE TABLE users (
+                user_id SERIAL PRIMARY KEY,
+                username VARCHAR(100) UNIQUE NOT NULL,
+                password VARCHAR(100) NOT NULL
+            )
+        `))
             .then(() => Promise.all([
                 sequelize.query(`
                     INSERT INTO recipes (recipe_name, recipe_description, recipe_instructions)
@@ -51,6 +59,13 @@ module.exports = {
                     (3, 'hot water', 50, 'milliliters'),
                     (3, 'flour', 300, 'grams'),
                     (3, 'chocolate chips', 200, 'grams')
+                `),
+                sequelize.query(`
+                    INSERT INTO users (username, password)
+                    VALUES 
+                    ('admin', 'admin123'),
+                    ('user1', 'password1'),
+                    ('user2', 'password2')
                 `)
             ]))
             .then(() => {

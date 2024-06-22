@@ -6,6 +6,7 @@ const { SERVER_PORT } = process.env
 const { seed } = require('./controllers/seed')
 const {addRecipe, updateRecipe,  getRecipe, getRecipes, deleteRecipe} = require('./controllers/recipeDtoController')
 const {searchRecipe} = require('./controllers/searchController')
+const { login, register } = require('./controllers/authController')
 
 app.use(express.json())
 app.use(cors())
@@ -21,5 +22,8 @@ app.put('/recipes/:recipe_id', updateRecipe)
 app.delete('/recipes/:recipe_id', deleteRecipe)
 
 app.get('/search', searchRecipe)
+
+app.post('/api/auth/login', login)
+app.post('/api/auth/register', register)
 
 app.listen(SERVER_PORT, () => console.log(`Server is running on ${SERVER_PORT}`))
